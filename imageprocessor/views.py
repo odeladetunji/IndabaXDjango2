@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files import File
 from .models import ImageHandler
+from .src import predict_app
 import io
 from django.core.files.storage import FileSystemStorage
 import shutil
@@ -20,4 +21,10 @@ def logOutfile(request):
     filename = fs.save(fileObject.name, fileObject)
     uploaded_file_url = fs.url(filename)
     shutil.move(fileObject.name, "./static/" + fileObject.name)
-    return HttpResponse(uploaded_file_url)    
+
+    img_path = "../static/" + fileObject.name
+    model_path= "/checkpoints/final_model.h5"
+    prediction_result = predict_app.main(img_path, model_path)
+
+    return HttpResponse(prediction_result)
+    # return HttpResponse(uploaded_file_url)    

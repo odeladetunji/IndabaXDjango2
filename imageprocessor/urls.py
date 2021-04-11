@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('processImages/', views.logOutfile, name='logOutfile'),
+    path('processImages', views.logOutfile, name='logOutfile'),
 ]
 
 
