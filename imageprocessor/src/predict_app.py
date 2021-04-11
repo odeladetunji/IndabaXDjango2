@@ -3,13 +3,16 @@ import numpy as np
 import tensorflow as tf
 from keras.models import load_model
 import params as cfg
-from utils import get_img_array
 from explain import *
-from models import XceptiponModel
-from PIL import Image
+from .models import XceptiponModel
 import uuid
-import cv2
 import matplotlib.pyplot as plt
+
+
+from PIL import Image
+import cv2
+from utils import get_img_array
+
 
 # save_img_path = r"C:\Users\User\Desktop\Workspace\interpretable-breast-cancer-diagnosis\predictions"
 save_img_path = "./predictions"
