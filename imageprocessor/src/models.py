@@ -15,7 +15,7 @@ class XceptiponModel():
     def __init__(self, input_shape, num_classes):
         self.input_shape = input_shape
         self.num_classes = num_classes
-        self.drop_out = cfg.dropout_rate
+        self.drop_out = dropout_rate
         self.model = Xception(weights='imagenet', include_top=False, pooling = 'avg',
                                 input_tensor=Input(shape=self.input_shape))
 
@@ -57,6 +57,37 @@ class XceptiponModel():
 
         return model
 
+
+random_seed = 24
+train_dir = 'dataset/train/'
+test_dir = "dataset/test/"
+
+model = "xception_alone"
+
+classnames = ['Benign', 'InSitu', 'Invasive', 'Normal']
+
+features_dir = "./extracted_features/"
+train_features = "./extracted_features/features_train.npy"
+valid_features = "./extracted_features/features_validate.npy"
+test_features = "./extracted_features/features_test.npy"
+
+checkpoint_name = "./checkpoints/checkpoint.h5"
+model_path = checkpoint_name +'.h5'
+result_file = "history.txt"
+train_batch_size = 8
+val_batch_size = 8
+test_batch_size = 4
+img_height, img_width = 512, 512
+input_shape = (img_height, img_width, 3)
+epochs = 30
+
+num_classes = 4
+lr = 0.001
+beta_1 = 0.6
+beta_2 = 0.8
+
+save_feature = True
+dropout_rate = 0.5
 """ test """
 
 # xception = XceptiponModel(input_shape=cfg.input_shape, num_classes=cfg.num_classes)
